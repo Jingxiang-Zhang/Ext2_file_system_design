@@ -1,18 +1,12 @@
----
-lng_pair: UN3_OS
-title: Ext2 File System Design
-author: Jingxiang Zhang
-category: Course Project
-tags: [C Language, C++]
-img: ":UN_3_OS/ext2.png"
-date: 2019-12-30 00:00:00
----
-
 ### Introduction
 
-After learning operation system course, the file management system intrigue me so much. Therefore, I decide to spend a few weeks to design and program this file system. I hope readers could have a better understanding of file system after read my code. Due to the complexity of the file system, <!-- outline-start -->This project is programmed by C++. I design a seven layer architecture to realize all the functions<!-- outline-end --> Here is the architecture diagram
+After learning operation system course, the file management system intrigue me so much. Therefore, I decide to spend a few weeks to design and program this file system. I hope readers could have a better understanding of file system after read my code. Due to the complexity of the file system, this project is programmed by C++. I design a seven layer architecture to realize all the functions. Here is the architecture diagram
 
 ![architecture ](:UN_3_OS/ext2.png){:data-align="center"}
+
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/ext2.png">
+</div>
 
 ### Architectural Analysis
 
@@ -20,7 +14,9 @@ After learning operation system course, the file management system intrigue me s
 
 In this layer, all the data store in Windows file system as files. Because all of this is based on Windows OS, I must follow it rules. Therefore, it just like a virtual disk. In order to achieve a powerful file system, my file system can be dynamically changed in length. Instead of using memory, I use disk to store the data.
 
-![architecture ](:UN_3_OS/physical_disk.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/physical_disk.png">
+</div>
 
 Each large disk block occupies 16MB (16 x 1024=16384) of space. If the memory space exceeds the threshold, a large disk block is dynamically created (as shown in the following figure). Those 16MB of space contain totally 4096 small blocks (each small block is 4KB), and those small block is the basic space to store data.
 
@@ -28,7 +24,9 @@ In a 16MB block, the first small block contains the basic information about the 
 
 Here is the diagram of this structure
 
-![virtual disk structure](:UN_3_OS/physical_structure.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/physical_structure.png">
+</div>
 
 #### 2. Disk Driver Layer
 
@@ -89,15 +87,21 @@ struct ext2_inode_physical { 		// each inode occupy 30 int size (120 bytes)
 
 Each inode need 120 bytes, and each inode use left-child right-sibling tree. Because each small block is 4096 bytes, it only have 30 FCB information. Each time FCB numbers greate than integer multiple of 30, it will needs a new small block to contain FCB. Here is the diagram of how FCB contain physical disk block. There is a root FCB information in the first disk block, it has the first (root) FCB block location. Through this, it will finds the first FCB in disk block, and all the file in the system can be found one by one by left-child right-sibling tree.
 
-![FCB top layer](:UN_3_OS/FCB_top_layer.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/FCB_top_layer.png">
+</div>
 
 This is the inode structure. It has two type of pointer, one is the inside pointer, the other is outside pointer. For FCB inside the 4096 bytes block, the inside pointer will be in used, otherwise the outside pointer will be in used. Note that those 30 FCB in one block must be in one directory, in order to guarantee the correction.
 
-![FCB link](:UN_3_OS/FCB_link.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/FCB_link.png">
+</div>
 
 For the data block of the file, please view the diagram below.
 
-![data block in inode](:UN_3_OS/data_block.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/data_block.png">
+</div>
 
 #### 5. File Driver Layer
 
@@ -176,14 +180,19 @@ Main function layer, waiting for user's input, and invoke the command execute fu
 
 Login the system (uid and pwd is root)
 
-![login](:UN_3_OS/login.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/login.png">
+</div>
 
 Initiate the system (create empty virtual disk)
 
-![initiation](:UN_3_OS/init.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/init.png">
+</div>
 
 Execute some basic command
 
-![command 1](:UN_3_OS/command.png){:data-align="center"}
+<div align="center">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/comman.png">
+</div>
 
-To download this project, please click [here](https://github.com/Jingxiang-Zhang/Vivado_MIPS_CPU).
