@@ -193,6 +193,6 @@ Initiate the system (create empty virtual disk)
 Execute some basic command
 
 <div align="center">
-  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/comman.png">
+  <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/command.png">
 </div>
 
