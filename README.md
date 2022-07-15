@@ -2,8 +2,6 @@
 
 After learning operation system course, the file management system intrigue me so much. Therefore, I decide to spend a few weeks to design and program this file system. I hope readers could have a better understanding of file system after read my code. Due to the complexity of the file system, this project is programmed by C++. I design a seven layer architecture to realize all the functions. Here is the architecture diagram
 
-![architecture ](:UN_3_OS/ext2.png){:data-align="center"}
-
 <div align="center">
   <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/ext2.png">
 </div>
@@ -91,7 +89,7 @@ Each inode need 120 bytes, and each inode use left-child right-sibling tree. Bec
   <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/FCB_top_layer.png">
 </div>
 
-This is the inode structure. It has two type of pointer, one is the inside pointer, the other is outside pointer. For FCB inside the 4096 bytes block, the inside pointer will be in used, otherwise the outside pointer will be in used. Note that those 30 FCB in one block must be in one directory, in order to guarantee the correction.
+This is the inode structure. It has two type of pointer, one is the inside pointer, the other is outside pointer. For FCB inside the 4096 bytes block, the inside pointer will be in used, otherwise the outside pointer will be in used. Note that those 30 FCB in one block must be in one directory, in order to guarantee the correctness.
 
 <div align="center">
   <img src="https://github.com/Jingxiang-Zhang/Ext2_file_system_design/blob/main/img/FCB_link.png">
